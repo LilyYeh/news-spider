@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>各媒體新聞</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .tab-content {
+            margin-top: 20px;
+        }
+
+        .time {
+            color: gray;
+            margin-right: 8px;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>即時新聞</h1>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          {% for category, articles in news.items() %}
+            <li class="nav-item">
+              <a class="nav-link {% if loop.index == 1 %}active{% endif %}" id="{{ category }}-tab" data-toggle="tab" href="#{{ category }}" role="tab" aria-controls="{{ category }}" aria-selected="true">
+                {{ media_categories[category] }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+          {% for category, articles in news.items() %}
+            <div class="tab-pane fade {% if loop.index == 1 %}show active{% endif %}" id="{{ category }}" role="tabpanel" aria-labelledby="{{ category }}-tab">
+              {% for media, media_articles in articles.items() %}
+                <h3>{{ media_titles[media] }}</h3>
+                <ul>
+                  {% for item in media_articles %}
+                    <li>
+                      {% if item.time %}
+                        <span class="time">{{ item.time }}</span>
+                      {% endif %}
+                      <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

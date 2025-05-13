@@ -5,6 +5,10 @@ udn = {
     "political": "https://udn.com/news/cate/2/6638",
     "international": "https://udn.com/news/cate/2/7225",
     "lifestyle": "https://udn.com/news/cate/2/6649",
+    "society_api": "https://udn.com/api/more?page=1&channelId=2&type=cate_latest_news&cate_id=6639&totalRecNo=156",
+    "political_api": "https://udn.com/api/more?page=1&channelId=2&type=cate_latest_news&cate_id=6638&totalRecNo=320",
+    "international_api": "https://udn.com/api/more?page=1&channelId=2&type=cate_latest_news&cate_id=7225&totalRecNo=518",
+    "lifestyle_api": "https://udn.com/api/more?page=1&channelId=2&type=cate_latest_news&cate_id=6649&totalRecNo=8925",
 }
 
 itn = {
@@ -37,6 +41,15 @@ setn = {
 tvbs = {
     "top": "https://news.tvbs.com.tw",
     "hot": "https://news.tvbs.com.tw",
+    "society": "#",
+    "political": "#",
+    "international": "#",
+    "lifestyle": "#",
+}
+
+yahoo = {
+    "top": "https://tw.news.yahoo.com",
+    "hot": "https://tw.news.yahoo.com/most-popular?guccounter=1",
     "society": "#",
     "political": "#",
     "international": "#",

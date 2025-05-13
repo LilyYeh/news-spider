@@ -14,6 +14,7 @@ def index():
             "setn": top.setn(),
         },
         "hot": {
+            "yahoo": hot.yahoo(),
             "udn": hot.udn(),
             "itn": hot.itn(),
             "apple": hot.apple(),

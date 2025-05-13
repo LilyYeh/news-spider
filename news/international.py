@@ -1,6 +1,7 @@
 from const import urls
 import fetch
 import func
+import requests
 
 #聯合新聞網
 def udn():
@@ -15,6 +16,16 @@ def udn():
             "title": title,
             "time": func.time_format(time),
             "link": "https://udn.com" + link
+        }
+        data.append(entry)
+
+    r = requests.get(urls.udn['international_api'])
+    news2 = r.json().get("lists", [])
+    for item in news2[:2]:
+        entry = {
+            "title": item.get('title'),
+            "time": func.time_format(item.get("time", {}).get("date", "")),
+            "link": "https://udn.com" + item.get("titleLink", "")
         }
         data.append(entry)
     return data

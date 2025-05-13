@@ -129,3 +129,19 @@ def tvbs():
         }
         data.append(entry)
     return data
+
+def yahoo():
+    soup = fetch.get_soup(urls.yahoo['hot'])
+    news = soup.select("#YDC-Stream .js-stream-content")
+    data = []
+    for item in news[:15]:
+        title = item.find('h3').get_text(strip=True)
+        link = item.select_one('h3 a')['href']
+        source = item.select_one(r'div.Ov\(h\).Pend\(44px\).Pstart\(25px\) > div').get_text(strip=True)
+        entry = {
+            "title": title,
+            "link": urls.yahoo['top'] + link,
+            "source": source
+        }
+        data.append(entry)
+    return data

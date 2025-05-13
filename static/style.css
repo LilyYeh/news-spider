@@ -130,3 +130,8 @@ h3 label.top a:hover {
     border: 1px solid #00BB00;
     color: #00BB00;
 }
+
+.tab-content ul li .source {
+    color: #979ba7;
+    font-size: 12px;
+}

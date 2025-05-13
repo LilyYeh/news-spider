@@ -55,6 +55,9 @@
                     </span>
                     {% endif %}
                     <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                    {% if item.source %}
+                        <span class="source">{{ item.source }}</span>
+                    {% endif %}
                 </li>
                 {% endfor %}
             </ul>

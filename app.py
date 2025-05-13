@@ -42,6 +42,7 @@ def index():
         "lifestyle": {
             "udn": lifestyle.udn(),
             "itn": lifestyle.itn(),
+            "apple": lifestyle.apple(),
             "setn": lifestyle.setn(),
         }
 

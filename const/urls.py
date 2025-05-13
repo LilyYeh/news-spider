@@ -26,7 +26,7 @@ apple = {
     "society": "https://tw.nextapple.com/realtime/local",
     "political": "https://tw.nextapple.com/realtime/politics",
     "international": "https://tw.nextapple.com/realtime/international",
-    "lifestyle": "https://tw.nextapple.com/realtime/eattravel",
+    "lifestyle": "https://tw.nextapple.com/realtime/life",
 }
 
 setn = {

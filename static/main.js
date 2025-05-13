@@ -12,3 +12,19 @@ window.onload = function() {
 	  $('#top').addClass('show active');
   }
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+    const nav = document.getElementById("myTab");
+    const placeholder = document.getElementById("navPlaceholder");
+    const offsetTop = nav.offsetTop;
+
+    window.addEventListener("scroll", function () {
+        if (window.pageYOffset >= offsetTop) {
+            nav.classList.add("sticky-nav");
+            placeholder.style.display = "block";
+        } else {
+            nav.classList.remove("sticky-nav");
+            placeholder.style.display = "none";
+        }
+    });
+});

@@ -13,16 +13,19 @@
 <div class="container">
     <h1>各媒體新聞</h1>
 
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        {% for category, articles in news.items() %}
-        <li class="nav-item" onclick="setTab('{{ category }}')">
-            <a class="nav-link" id="{{ category }}-tab" data-toggle="tab"
-               href="#{{ category }}" role="tab" aria-controls="{{ category }}" aria-selected="true">
-                {{ categories[category] }}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div id="navWrapper">
+        <div class="placeholder" id="navPlaceholder"></div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            {% for category, articles in news.items() %}
+            <li class="nav-item" onclick="setTab('{{ category }}')">
+                <a class="nav-link" id="{{ category }}-tab" data-toggle="tab"
+                   href="#{{ category }}" role="tab" aria-controls="{{ category }}" aria-selected="true">
+                    {{ categories[category] }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 
     <div class="tab-content" id="myTabContent">
         {% for category, articles in news.items() %}

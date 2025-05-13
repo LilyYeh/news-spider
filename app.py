@@ -1,17 +1,24 @@
 from flask import Flask, jsonify, render_template
 from const import urls, medias, categories
-from news import hot, society, political, international, lifestyle
+from news import top, hot, society, political, international, lifestyle
 import sys
 
 app = Flask(__name__)
 @app.route("/")
 def index():
     news = {
+        "top": {
+            "udn": top.udn(),
+            "itn": top.itn(),
+            "apple": top.apple(),
+            "setn": top.setn(),
+        },
         "hot": {
             "udn": hot.udn(),
             "itn": hot.itn(),
             "apple": hot.apple(),
-            "setn": hot.setn()
+            "setn": hot.setn(),
+            "tvbs": hot.tvbs(),
         },
         "society": {
             "udn": society.udn(),
@@ -34,7 +41,6 @@ def index():
         "lifestyle": {
             "udn": lifestyle.udn(),
             "itn": lifestyle.itn(),
-            "apple": None,
             "setn": lifestyle.setn(),
         }
 

@@ -1,21 +1,27 @@
 from const import urls
 import fetch
 import func
+import sys
 
 #聯合新聞網
 def udn():
-    #社會
     soup = fetch.get_soup(urls.udn['hot'])
     news = soup.select("section.thumb-news .story-list__holder .story-list__news")
     data = []
     for item in news[:15]:
         title = item.find('h2').get_text(strip=True)
         time = item.select_one('.story-list__time').get_text(strip=True)
-        link = item.find('a')['href']
+        link = item.select_one('h2 a')['href']
+        label = item.select_one('.story-list__info > a')
+        tag = {
+            'text': label.get_text(strip=True),
+            'link': label['href']
+        }
         entry = {
             "title": title,
             "time": func.time_format(time),
-            "link": "https://udn.com" + link
+            "link": link,
+            "tag": tag
         }
         data.append(entry)
     return data
@@ -57,11 +63,17 @@ def apple():
     for item in news[:15]:
         title = item.find('h3').get_text(strip=True)
         time = item.find('time').get_text(strip=True)
-        link = item.find('a')['href']
+        link = item.select_one('h3 a')['href']
+        label = item.select_one('.post-meta .category')
+        tag = {
+            'text': label.get_text(strip=True),
+            'link': None
+        }
         entry = {
             "title": title,
             "time": func.time_format(time),
-            "link": link
+            "link": link,
+            "tag": tag
         }
         data.append(entry)
     return data
@@ -74,11 +86,46 @@ def setn():
     for item in news[:15]:
         title = item.find('h3').get_text(strip=True)
         time = item.find('time').get_text(strip=True)
-        link = item.find('a')['href']
+        link = item.select_one('h3 a')['href']
+        label = item.select_one('.newslabel-tab a')
+        label_text = label.get_text(strip=True)
+        if label_text == '娛樂':
+            label_link = "https://star.setn.com"
+        else:
+            label_link = "https://www.setn.com/ViewAll.aspx" + label["href"]
+        tag = {
+            "text": label_text,
+            "link": label_link
+        }
         entry = {
             "title": title,
             "time": func.time_format(time),
-            "link": "https://www.setn.com" + link
+            "link": "https://www.setn.com" + link,
+            "tag": tag
+        }
+        data.append(entry)
+    return data
+
+#TVBS
+def tvbs():
+    soup = fetch.get_soup(urls.tvbs['hot'])
+    news = soup.select(".article_rank .list ul li")
+    data = []
+    for item in news:
+        h2 = item.select_one('a h2')
+        if not h2:
+            continue
+        title = h2.get_text(strip=True)
+        link = item.find('a')['href']
+        tag = {
+            "text": item.select('a')[1].text,
+            "link": urls.tvbs['top'] + item.select('a')[1]["href"]
+        }
+        entry = {
+            "title": title,
+            "time": None,
+            "link": urls.tvbs['top'] + link,
+            "tag": tag
         }
         data.append(entry)
     return data

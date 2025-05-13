@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>各媒體新聞</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <!-- 引入 Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -10,12 +11,12 @@
 <body>
 
 <div class="container">
-    <h1>即時新聞</h1>
+    <h1>各媒體新聞</h1>
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         {% for category, articles in news.items() %}
-        <li class="nav-item">
-            <a class="nav-link {% if loop.index == 1 %}active{% endif %}" id="{{ category }}-tab" data-toggle="tab"
+        <li class="nav-item" onclick="setTab('{{ category }}')">
+            <a class="nav-link" id="{{ category }}-tab" data-toggle="tab"
                href="#{{ category }}" role="tab" aria-controls="{{ category }}" aria-selected="true">
                 {{ categories[category] }}
             </a>
@@ -25,7 +26,7 @@
 
     <div class="tab-content" id="myTabContent">
         {% for category, articles in news.items() %}
-        <div class="tab-pane fade {% if loop.index == 1 %}show active{% endif %}" id="{{ category }}" role="tabpanel"
+        <div class="tab-pane fade" id="{{ category }}" role="tabpanel"
              aria-labelledby="{{ category }}-tab">
             {% for media, media_articles in articles.items() %}
             <h3>
@@ -41,6 +42,15 @@
                     {% if item.time %}
                     <span class="time">{{ item.time }}</span>
                     {% endif %}
+                    {% if item.tag %}
+                    <span class="tag">
+                        {% if item.tag['link'] %}
+                        <a href="{{ item.tag['link'] }}">{{ item.tag['text'] }}</a>
+                        {% else %}
+                        <span>{{ item.tag['text'] }}</span>
+                        {% endif %}
+                    </span>
+                    {% endif %}
                     <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
                 </li>
                 {% endfor %}
@@ -55,6 +65,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>

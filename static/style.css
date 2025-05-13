@@ -4,6 +4,10 @@ body {
     margin-top: 20px;
 }
 
+.container {
+    padding-bottom: 100px;
+}
+
 h1 {
     margin-bottom: 20px;
 }
@@ -14,7 +18,18 @@ h1 {
 
 .time {
     color: gray;
-    margin-right: 8px;
+}
+
+.tag > a, .tag > span {
+    font-size: 12px;
+    font-style: normal;
+    letter-spacing: 1px;
+    padding: 3px 5px;
+    border-radius: 5px;
+    border: #000 1px solid;
+    color: #000;
+    display: inline-block;
+    line-height: 1;
 }
 
 h2 {
@@ -89,4 +104,14 @@ h3 label.hot a:hover {
     background: #fff;
     border: 1px solid #F00078;
     color: #F00078;
+}
+
+h3 label.top a {
+    background: #00BB00;
+}
+
+h3 label.top a:hover {
+    background: #fff;
+    border: 1px solid #00BB00;
+    color: #00BB00;
 }

@@ -33,3 +33,12 @@ setn = {
     "international": "https://www.setn.com/catalog.aspx?pagegroupid=5",
     "lifestyle": "https://www.setn.com/catalog.aspx?pagegroupid=4",
 }
+
+tvbs = {
+    "top": "https://news.tvbs.com.tw",
+    "hot": "https://news.tvbs.com.tw",
+    "society": "#",
+    "political": "#",
+    "international": "#",
+    "lifestyle": "#",
+}

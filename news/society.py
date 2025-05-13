@@ -4,7 +4,6 @@ import func
 
 #聯合新聞網
 def udn():
-    #社會
     soup = fetch.get_soup(urls.udn['society'])
     news = soup.select("section.thumb-news .story-list__holder .story-list__news")
     data = []
@@ -56,15 +55,15 @@ def apple():
 #三立新聞網
 def setn():
     soup = fetch.get_soup(urls.setn['society'])
-    news = soup.select(".focus_news #owl-demo .item")
+    news = soup.select(".focus_news #owl-demo .item .captionText a")
     data = []
     for item in news:
-        title = item.select('.captionText strong')[0].text
-        link = item.find('a')['href']
+        title = item.find('strong').get_text(strip=True)
+        link = item['href']
         entry = {
             "title": title,
             "time": None,
-            "link": "https://www.setn.com" + link
+            "link": urls.setn['top'] + link
         }
         data.append(entry)
     return data

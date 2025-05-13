@@ -1,4 +1,5 @@
 categories = {
+    "top": "頭條",
     "hot": "熱門",
     "society": "社會",
     "political": "政治",

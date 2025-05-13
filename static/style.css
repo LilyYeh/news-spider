@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin-top: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+.time {
+    color: gray;
+    margin-right: 8px;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+h3 > a {
+    text-decoration: none;
+    color: #000;
+}
+
+h3 > a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+h3 label a {
+    font-size: 12px;
+    color: #fff;
+    font-style: normal;
+    letter-spacing: 1px;
+    padding: 3px 5px;
+    border-radius: 5px;
+    margin-bottom: 0;
+    background: #e05d14;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+h3 label a:hover {
+    background: #fff;
+    border: 1px solid #e05d14;
+    color: #e05d14;
+    text-decoration: none;
+}
+
+h3 label.political a {
+    background: #8e8e9b;
+}
+
+h3 label.political a:hover {
+    background: #fff;
+    border: 1px solid #8e8e9b;
+    color: #8e8e9b;
+}
+
+h3 label.international a {
+    background: #055699;
+}
+
+h3 label.international a:hover {
+    background: #fff;
+    border: 1px solid #055699;
+    color: #055699;
+}
+
+h3 label.lifestyle a {
+    background: #66a9d8;
+}
+
+h3 label.lifestyle a:hover {
+    background: #fff;
+    border: 1px solid #66a9d8;
+    color: #66a9d8;
+}
+
+h3 label.hot a {
+    background: #F00078;
+}
+
+h3 label.hot a:hover {
+    background: #fff;
+    border: 1px solid #F00078;
+    color: #F00078;
+}

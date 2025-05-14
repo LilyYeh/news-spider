@@ -131,6 +131,16 @@ h3 label.top a:hover {
     color: #00BB00;
 }
 
+h3 label.series a {
+    background: #BB5E00;
+}
+
+h3 label.series a:hover {
+    background: #fff;
+    border: 1px solid #BB5E00;
+    color: #BB5E00;
+}
+
 .tab-content ul li .source {
     color: #979ba7;
     font-size: 12px;

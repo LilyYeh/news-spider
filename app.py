@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template
 from const import urls, medias, categories
-from news import top, hot, society, political, international, lifestyle
+from news import top, hot, society, political, international, lifestyle, series
 import sys
 
 app = Flask(__name__)
@@ -44,8 +44,12 @@ def index():
             "itn": lifestyle.itn(),
             "apple": lifestyle.apple(),
             "setn": lifestyle.setn(),
+        },
+        "series": {
+            "udn": series.udn(),
+            "setn": series.setn(),
+            "tvbs": series.tvbs(),
         }
-
     }
 
     return render_template(

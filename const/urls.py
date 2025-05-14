@@ -9,6 +9,7 @@ udn = {
     "political_api": "https://udn.com/api/more?page=1&channelId=2&type=cate_latest_news&cate_id=6638&totalRecNo=320",
     "international_api": "https://udn.com/api/more?page=1&channelId=2&type=cate_latest_news&cate_id=7225&totalRecNo=518",
     "lifestyle_api": "https://udn.com/api/more?page=1&channelId=2&type=cate_latest_news&cate_id=6649&totalRecNo=8925",
+    "series": "https://udn.com/news/index"
 }
 
 itn = {
@@ -36,6 +37,7 @@ setn = {
     "political": "https://www.setn.com/catalog.aspx?pagegroupid=6",
     "international": "https://www.setn.com/catalog.aspx?pagegroupid=5",
     "lifestyle": "https://www.setn.com/catalog.aspx?pagegroupid=4",
+    "series": "https://www.setn.com/"
 }
 
 tvbs = {
@@ -45,6 +47,7 @@ tvbs = {
     "political": "#",
     "international": "#",
     "lifestyle": "#",
+    "series": "https://news.tvbs.com.tw/"
 }
 
 yahoo = {

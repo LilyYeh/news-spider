@@ -40,7 +40,7 @@ setn = {
 
 tvbs = {
     "top": "https://news.tvbs.com.tw",
-    "hot": "https://news.tvbs.com.tw",
+    "hot": "https://news.tvbs.com.tw/hot",
     "society": "#",
     "political": "#",
     "international": "#",

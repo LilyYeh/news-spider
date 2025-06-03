@@ -186,6 +186,7 @@ h3 label.keyword a:hover {
     border-radius: 6px;
     padding: 10px 15px;
     width: 300px;
+    background: #ffffff;
 }
 
 .ettoday-wrapper > ul {

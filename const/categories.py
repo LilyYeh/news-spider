@@ -5,5 +5,5 @@ categories = {
     "political": "政治",
     "international": "國際",
     "lifestyle": "生活",
-    "series": "#tag"
+    "keyword": "關鍵字"
 }

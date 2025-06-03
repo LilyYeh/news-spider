@@ -1,3 +1,5 @@
+import sys
+
 from const import urls
 import fetch
 import func
@@ -75,6 +77,23 @@ def setn(type):
             "title": title,
             "time": None,
             "link": urls.setn['top'] + link
+        }
+        data.append(entry)
+    return data
+
+#ETtoday
+def ettoday(type):
+    soup = fetch.get_soup(urls.ettoday[type])
+    news = soup.select(".part_pictxt_3 .piece")
+    data = []
+    for item in news[:8]:
+        title = item.find('h3').get_text(strip=True)
+        link = item.find('a')['href']
+        time = item.select_one('.date').get_text(strip=True)
+        entry = {
+            "title": title,
+            "time": time,
+            "link": link
         }
         data.append(entry)
     return data

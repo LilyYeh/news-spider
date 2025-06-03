@@ -17,3 +17,7 @@ def apple():
 #三立新聞網
 def setn():
     return template.setn(type)
+
+#ETtoday
+def ettoday():
+    return template.ettoday(type)

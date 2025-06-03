@@ -29,11 +29,10 @@
 
     <div class="tab-content" id="myTabContent">
         {% for category, articles in news.items() %}
-        <div class="tab-pane fade" id="{{ category }}" role="tabpanel"
-             aria-labelledby="{{ category }}-tab">
+        <div class="tab-pane fade" id="{{ category }}" role="tabpanel" aria-labelledby="{{ category }}-tab">
             {% for media, media_articles in articles.items() %}
             <h3>
-                <a href="{{ urls[media]['top'] }}">{{ medias[media] }}</a>
+                <a target="_blank" href="{{ urls[media]['top'] }}">{{ medias[media] }}</a>
                 <label class="{{ category }}">
                     <a target="_blank" href="{{ urls[media][category] }}">{{ categories[category] }}</a>
                 </label>
@@ -63,6 +62,25 @@
             </ul>
             {% endif %}
             {% endfor %}
+
+            {% if articles['ettoday'] %}
+            <div class="ettoday-wrapper">
+                <h3>
+                    <a target="_blank" href="{{ urls['ettoday']['top'] }}">{{ medias['ettoday'] }}</a>
+                    <label class="{{ category }}">
+                        <a target="_blank" href="{{ urls['ettoday'][category] }}">{{ categories[category] }}</a>
+                    </label>
+                </h3>
+                <ul>
+                    {% for item in articles['ettoday'] %}
+                    <li>
+                        <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                        <span class="time">{{ item.time }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

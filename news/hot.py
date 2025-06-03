@@ -3,7 +3,10 @@ import fetch
 import func
 import requests
 import datetime
+from news import template
 import sys
+
+type = 'hot'
 
 #聯合新聞網
 def udn():
@@ -205,4 +208,7 @@ def yahoo():
         data = data + more_data
     return data
 
+#ETtoday
+def ettoday():
+    return template.ettoday(type)
 

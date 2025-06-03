@@ -1,5 +1,7 @@
 from const import urls
 import fetch
+import re
+import json
 import sys
 
 #聯合新聞網
@@ -19,6 +21,50 @@ def udn():
             "link": link
         }
         data.append(entry)
+
+    keywords = soup.select("section.keywords a")
+    if keywords is None:
+        return data
+    for keyword in keywords:
+        title = keyword.get_text(strip=True)
+        link = keyword['href']
+        entry = {
+            "title": title,
+            "link": link if re.match(r'^https', link) else "https://udn.com" + link
+        }
+        data.append(entry)
+
+    return data
+
+#自由電子報
+def itn():
+    soup = fetch.get_soup(urls.itn['top'])
+
+    hot_keywords_block = soup.find('div', id='hot_keyword_area')
+    scripts = hot_keywords_block.find_all('script')
+
+    keywords = None
+    for script in scripts:
+        if 'hot_keyword_words' in script.text:
+            match = re.search(r'var\s+hot_keyword_words\s*=\s*(\[.*?\]);', script.text, re.DOTALL)
+            if match:
+                json_text = match.group(1)
+                keywords = json.loads(json_text)
+                break
+
+    if keywords is None:
+        return None
+
+    data = []
+    for keyword in keywords:
+        title = keyword['text']
+        link = keyword['link']['href']
+        entry = {
+            "title": title,
+            "link": link
+        }
+        data.append(entry)
+
     return data
 
 #三立新聞網

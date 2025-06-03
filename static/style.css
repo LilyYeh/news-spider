@@ -131,17 +131,73 @@ h3 label.top a:hover {
     color: #00BB00;
 }
 
-h3 label.series a {
-    background: #BB5E00;
+h3 label.keyword a {
+    background: #8f1ac9;
 }
 
-h3 label.series a:hover {
+h3 label.keyword a:hover {
     background: #fff;
-    border: 1px solid #BB5E00;
-    color: #BB5E00;
+    border: 1px solid #8f1ac9;
+    color: #8f1ac9;
 }
 
 .tab-content ul li .source {
     color: #979ba7;
+    font-size: 12px;
+}
+
+/*tab content*/
+#keyword > ul {
+    display: inline-block;
+    padding-left: 0;
+}
+
+#keyword > ul > li {
+    float: left;
+    text-decoration: none;
+    list-style: none;
+    width: max-content;
+    border-radius: 4px;
+    border: 1px solid #007bff;
+    margin: 0 5px 5px 0;
+}
+
+#keyword > ul > li > a {
+    display: block;
+    padding: 0 5px;
+    height: 28px;
+    line-height: 28px;
+}
+
+#keyword > ul > li:hover {
+    background: #007bff;
+}
+
+#keyword > ul > li:hover a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.ettoday-wrapper {
+    position: fixed;
+    bottom: 15px;
+    left: calc(100vw - 315px);
+    border: 1px solid;
+    border-radius: 6px;
+    padding: 10px 15px;
+    width: 300px;
+}
+
+.ettoday-wrapper > ul {
+    padding-left: 15px;
+}
+
+.ettoday-wrapper > ul > li {
+    margin-bottom: 8px;
+    line-height: 22px;
+}
+
+.ettoday-wrapper > ul > li .time {
+    display: block;
     font-size: 12px;
 }

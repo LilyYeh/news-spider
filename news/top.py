@@ -6,9 +6,11 @@ import json
 import demjson3
 import sys
 
+type = 'top'
+
 #聯合新聞網
 def udn():
-    soup = fetch.get_soup(urls.udn['top'])
+    soup = fetch.get_soup(urls.udn[type])
     scripts = soup.find_all('script')
     for script in scripts:
         if '__UDN__.newsLists' in script.text:
@@ -33,7 +35,7 @@ def udn():
 
 #自由電子報
 def itn():
-    soup = fetch.get_soup(urls.itn['top'])
+    soup = fetch.get_soup(urls.itn[type])
     news = soup.select(".jumbotron .swiper-container .swiper-slide a")
     data = []
     for item in news:
@@ -48,7 +50,7 @@ def itn():
 
 #蘋果新聞網
 def apple():
-    soup = fetch.get_soup(urls.apple['top'])
+    soup = fetch.get_soup(urls.apple[type])
     news = soup.select("#top-slider .swiper-wrapper .swiper-slide article.post-style1 a")
     data = []
     for item in news[:15]:
@@ -68,7 +70,7 @@ def apple():
 
 #三立新聞網
 def setn():
-    soup = fetch.get_soup(urls.setn['top'])
+    soup = fetch.get_soup(urls.setn[type])
     news = soup.select(".focus_news #owl-demo .item .captionText a")
     data = []
     for item in news:
@@ -77,6 +79,29 @@ def setn():
         entry = {
             "title": title,
             "link": urls.setn['top'] + link
+        }
+        data.append(entry)
+    return data
+
+#ETtoday
+def ettoday():
+    soup = fetch.get_soup(urls.ettoday[type])
+    news = soup.select(".area_1 .piece") + soup.select(".area_2 .piece")
+
+    data = []
+    for item in news:
+        if (item.find('a') is None):
+            continue
+
+        title = item.find('a')['title']
+        link = item.find('a')['href']
+        tag = None
+        if item.select_one('.tag') is not None:
+            tag = item.select_one('.tag').get_text(strip=True)
+        entry = {
+            "title": title,
+            "tag": tag,
+            "link": link
         }
         data.append(entry)
     return data

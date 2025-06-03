@@ -5,4 +5,5 @@ medias = {
     "setn": "三立新聞網",
     "tvbs": "TVBS新聞網",
     "yahoo": "yahoo!新聞",
+    "ettoday": "ETtoday新聞雲",
 }

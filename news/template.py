@@ -84,9 +84,9 @@ def setn(type):
 #ETtoday
 def ettoday(type):
     soup = fetch.get_soup(urls.ettoday[type])
-    news = soup.select(".part_pictxt_3 .piece")
+    news = soup.select(".part_area_1 .part_pictxt_7 .piece")
     data = []
-    for item in news[:8]:
+    for item in news:
         title = item.find('h3').get_text(strip=True)
         link = item.find('a')['href']
         time = item.select_one('.date').get_text(strip=True)
@@ -96,4 +96,34 @@ def ettoday(type):
             "link": link
         }
         data.append(entry)
+
+    news = soup.select(".part_area_1 .part_list_3 h3")
+    for item in news:
+        if item.find('a') is None:
+            continue
+        title = item.find('a')['title']
+        link = item.find('a')['href']
+
+        time = None
+        if item.select_one('.date') is not None:
+            time = item.select_one('.date').get_text(strip=True)
+        entry = {
+            "title": title,
+            "time": time,
+            "link": link
+        }
+        data.append(entry)
+
+    news = soup.select(".part_pictxt_3 .piece")
+    for item in news[:4]:
+        title = item.find('h3').get_text(strip=True)
+        link = item.find('a')['href']
+        time = item.select_one('.date').get_text(strip=True)
+        entry = {
+            "title": title,
+            "time": time,
+            "link": link
+        }
+        data.append(entry)
+
     return data

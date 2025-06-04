@@ -63,10 +63,10 @@ $(document).ready(function () {
     });
 
     function switchCollapseWrapper() {
-        if (isOpen === 'false') {
-            closeAllCollapseWrapper();
-        } else {
+        if (isOpen === 'true') {
             openCollapseWrapper();
+        } else {
+            closeAllCollapseWrapper();
         }
     }
 

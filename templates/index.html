@@ -17,6 +17,7 @@
     <div id="navWrapper">
         <div class="placeholder" id="navPlaceholder"></div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <label class="last-update-time">上次更新時間：<span></span></label>
             {% for category, articles in news.items() %}
             <li class="nav-item" onclick="setTab('{{ category }}')">
                 <a class="nav-link" id="{{ category }}-tab" data-toggle="tab"
@@ -67,22 +68,30 @@
             {% endfor %}
 
             {% if articles['ettoday'] %}
-            <div class="ettoday-wrapper">
-                <h3>
-                    <a target="_blank" href="{{ urls['ettoday']['top'] }}">{{ medias['ettoday'] }}</a>
-                    <label class="{{ category }}">
-                        <a target="_blank" href="{{ urls['ettoday'][category] }}">{{ categories[category] }}</a>
-                    </label>
-                </h3>
-                <ul>
-                    {% for item in articles['ettoday'] %}
-                    <li>
-                        <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-                        <span class="time">{{ item.time }}</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                <div class="ettoday-wrapper">
+                    <div class="header">
+                        <h3>
+                            <a target="_blank" href="{{ urls['ettoday']['top'] }}">{{ medias['ettoday'] }}</a>
+                            <label class="{{ category }}">
+                                <a target="_blank" href="{{ urls['ettoday'][category] }}">{{ categories[category] }}</a>
+                            </label>
+                        </h3>
+                        <label class="collapse-btn" for="collapse-btn-{{ category }}"></label>
+                    </div>
+                    <div class="collapse-wrapper">
+                        <ul>
+                            {% for item in articles['ettoday'] %}
+                                <li>
+                                    <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                                    {% if item.tag %}
+                                        <span class="tag"><span>{{ item.tag['text'] }}</span></span>
+                                    {% endif %}
+                                    <span class="time">{{ item.time }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             {% endif %}
         </div>
         {% endfor %}

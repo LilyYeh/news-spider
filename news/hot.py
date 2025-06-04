@@ -219,7 +219,7 @@ def ettoday():
         time = item.select_one('.date').get_text(strip=True)
         entry = {
             "title": title,
-            "time": time,
+            "time": func.time_format(time),
             "link": link
         }
         data.append(entry)

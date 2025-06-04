@@ -12,6 +12,7 @@ type = 'top'
 def udn():
     soup = fetch.get_soup(urls.udn[type])
     scripts = soup.find_all('script')
+    js_code = None
     for script in scripts:
         if '__UDN__.newsLists' in script.text:
             js_code = script.string or script.text
@@ -97,7 +98,9 @@ def ettoday():
         link = item.find('a')['href']
         tag = None
         if item.select_one('.tag') is not None:
-            tag = item.select_one('.tag').get_text(strip=True)
+            tag = {
+                'text': item.select_one('.tag').get_text(strip=True),
+            }
         entry = {
             "title": title,
             "tag": tag,

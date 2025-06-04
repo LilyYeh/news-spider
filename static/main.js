@@ -51,14 +51,14 @@ $(document).ready(function () {
     switchCollapseWrapper();
 
     $(collapseBtn).on('click', function () {
-        if (isOpen === 'false') {
-            openCollapseWrapper();
-            isOpen = 'true';
-            sessionStorage.setItem('isOpenEttodayWrapper', 'true');
-        } else {
+        if (isOpen === 'true') {
             closeAllCollapseWrapper();
             isOpen = 'false';
             sessionStorage.setItem('isOpenEttodayWrapper', 'false');
+        } else {
+            openCollapseWrapper();
+            isOpen = 'true';
+            sessionStorage.setItem('isOpenEttodayWrapper', 'true');
         }
     });
 

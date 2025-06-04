@@ -204,7 +204,12 @@ h3 label.keyword a:hover {
 .ettoday-wrapper .header h3 {
     flex: 6;
     padding-top: 13px;
-    padding-left: 15px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.ettoday-wrapper .header h3 img.logo {
+    width: 200px;
 }
 
 .ettoday-wrapper .header h3 label {
@@ -219,7 +224,7 @@ h3 label.keyword a:hover {
 }
 
 .ettoday-wrapper .collapse-wrapper > ul {
-    padding-left: 15px;
+    padding-left: 20px;
 }
 
 .ettoday-wrapper .collapse-wrapper > ul > li {
@@ -254,11 +259,17 @@ h3 label.keyword a:hover {
 }
 
 .ettoday-wrapper.collapsed {
-    width: 220px;
+    width: 230px;
 }
 
 .ettoday-wrapper.collapsed .header h3 {
     font-size: 16px;
+    padding-left: 15px;
+    margin-bottom: 0;
+}
+
+.ettoday-wrapper.collapsed .header h3 img.logo {
+    width: 120px;
 }
 
 .ettoday-wrapper.collapsed .collapse-btn:before {

@@ -258,6 +258,10 @@ h3 label.keyword a:hover {
     transform: rotate(45deg);
 }
 
+.ettoday-wrapper .collapse-btn:hover {
+    background: #82818157;
+}
+
 .ettoday-wrapper.collapsed {
     width: 230px;
 }

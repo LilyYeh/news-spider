@@ -1,9 +1,8 @@
-import sys
-
 from const import urls
 import fetch
 import func
 import requests
+import sys
 
 #聯合新聞網
 def udn(type):

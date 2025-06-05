@@ -1,8 +1,6 @@
 from const import urls
 import fetch
-import func
 import re
-import json
 import demjson3
 import sys
 

@@ -1,10 +1,9 @@
 from const import urls
 import fetch
 import func
-import requests
-import datetime
-from news import template
 import sys
+from playwright.sync_api import sync_playwright
+import time
 
 type = 'hot'
 
@@ -158,6 +157,49 @@ def yahoo():
             "source": source
         }
         data.append(entry)
+    return data
+
+def yahoo_more():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)  # 設定 True 就是無頭模式
+        page = browser.new_page()
+        page.goto('https://tw.news.yahoo.com/most-popular', wait_until="domcontentloaded")
+
+        # 滾動觸發載入更多
+        page.mouse.wheel(0, 3000)
+        time.sleep(1)  # 等待新資料出現
+
+        # 抓 news
+        news = page.query_selector_all("li.js-stream-content")
+
+        # 抓第 1～25 個
+        data = []
+        for idx, item in enumerate(news[:25], start=1):
+            h3 = item.query_selector("h3")
+            if h3 is None:
+                continue
+
+            title = h3.inner_text()
+
+            a_tag = h3.query_selector("a")
+            link = None
+            if a_tag:
+                link = a_tag.get_attribute("href")
+
+            target = item.query_selector('.Cf > div:nth-child(1) > div img')
+            if target:
+                target = item.query_selector('.Cf > div:nth-child(2) > div')
+            else:
+                target = item.query_selector('.Cf > div:nth-child(1) > div')
+            source = target.inner_text().replace("•", " • ") if target else None
+
+            entry = {
+                "title": title,
+                "link": urls.yahoo['top'] + link,
+                "source": source
+            }
+            data.append(entry)
+        browser.close()
     return data
 
 #ETtoday

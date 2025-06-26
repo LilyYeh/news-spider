@@ -2,6 +2,7 @@ from const import urls
 import fetch
 import re
 import demjson3
+from playwright.sync_api import sync_playwright
 import sys
 
 type = 'top'
@@ -81,6 +82,15 @@ def setn():
         }
         data.append(entry)
     return data
+
+#中時新聞網
+def chinatimes():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)  # 設為 False 以開啟瀏覽器視窗
+        page = browser.new_page()
+        page.goto(urls.chinatimes[type])
+        print(page.title())
+        browser.close()
 
 #ETtoday
 def ettoday():

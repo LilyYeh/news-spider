@@ -45,6 +45,11 @@ setn = {
     "keyword": "https://www.setn.com/"
 }
 
+#中時新聞網
+chinatimes = {
+    "top": "https://www.chinatimes.com/?chdtv"
+}
+
 #TVBS
 tvbs = {
     "top": "https://news.tvbs.com.tw",

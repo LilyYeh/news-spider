@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template
 from const import urls, medias, categories
 from news import top, hot, society, political, international, lifestyle, keyword
 from concurrent.futures import ThreadPoolExecutor
+import gc
 import sys
 
 #top.chinatimes()
@@ -19,7 +20,7 @@ def index():
             'top_apple': executor.submit(top.apple),
             'top_setn': executor.submit(top.setn),
             'top_ettoday': executor.submit(top.ettoday),
-            'top_chinatimes': executor.submit(top.chinatimes),
+            #'top_chinatimes': executor.submit(top.chinatimes),
             'hot_yahoo': executor.submit(hot.yahoo_more),
             'hot_udn': executor.submit(hot.udn),
             'hot_itn': executor.submit(hot.itn),
@@ -65,7 +66,7 @@ def index():
                 "itn": futures['top_itn'].result(),
                 "apple": futures['top_apple'].result(),
                 "setn": futures['top_setn'].result(),
-                "chinatimes": futures['top_chinatimes'].result(),
+                #"chinatimes": futures['top_chinatimes'].result(),
                 "ettoday": futures['top_ettoday'].result(),
             },
             "hot": {
@@ -119,13 +120,20 @@ def index():
             }
         }
 
-    return render_template(
+    rendered = render_template(
         "index.html",
         urls=urls,
         news=news,
         medias=medias.medias,
         categories=categories.categories
     )
+
+    # 主動釋放記憶體
+    del futures
+    del news
+    gc.collect()
+
+    return rendered
 
 
 if __name__ == "__main__":

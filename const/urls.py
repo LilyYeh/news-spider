@@ -45,11 +45,6 @@ setn = {
     "keyword": "https://www.setn.com/"
 }
 
-#中時新聞網
-chinatimes = {
-    "top": "https://www.chinatimes.com/?chdtv"
-}
-
 #TVBS
 tvbs = {
     "top": "https://news.tvbs.com.tw",
@@ -79,4 +74,14 @@ ettoday = {
     "political": "https://www.ettoday.net/news/focus/政治/",
     "international": "https://www.ettoday.net/news/focus/國際/",
     "lifestyle": "https://www.ettoday.net/news/focus/生活/",
+}
+
+#中時新聞網
+chinatimes = {
+    "top": "https://www.chinatimes.com/?chdtv",
+    "hot": "https://www.chinatimes.com/hotnews?chdtv",
+    "society": "https://www.chinatimes.com/society/?chdtv",
+    "political": "https://www.chinatimes.com/politic/?chdtv",
+    "international": "https://www.chinatimes.com/world/?chdtv",
+    "lifestyle": "https://www.chinatimes.com/life/?chdtv",
 }

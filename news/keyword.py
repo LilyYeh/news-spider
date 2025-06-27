@@ -2,6 +2,7 @@ from const import urls
 import fetch
 import re
 import json
+from playwright.sync_api import sync_playwright
 import sys
 
 #聯合新聞網
@@ -109,4 +110,51 @@ def tvbs():
 
         if title == '首頁':
             start = True
+    return data
+
+#中時新聞網
+def chinatimes():
+    soup = fetch.get_soup_with_header(urls.chinatimes['top'])
+    news_list = soup.select_one("ul.main-nav-item-group")
+    news = news_list.select("li.highlight.keyword")
+    data = []
+    for idx, item in enumerate(news, start=1):
+        title = item.get_text(strip=True)
+        link = item.find("a")['href']
+
+        entry = {
+            "title": title,
+            "link": link
+        }
+        data.append(entry)
+    return data
+
+def chinatimes_playwright():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--disable-infobars"
+            ]
+        )
+        page = browser.new_page(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+            viewport={"width": 1280, "height": 800},
+            java_script_enabled=True
+        )
+        page.goto(urls.chinatimes['top'], wait_until="domcontentloaded")
+        news_list = page.query_selector("ul.main-nav-item-group")
+        news = news_list.query_selector_all("li.highlight.keyword")
+        data = []
+        for idx, item in enumerate(news, start=1):
+            title = item.inner_text()
+            link = item.query_selector("a").get_attribute("href")
+
+            entry = {
+                "title": title,
+                "link": link
+            }
+            data.append(entry)
+        browser.close()
     return data

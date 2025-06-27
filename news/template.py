@@ -2,6 +2,7 @@ from const import urls
 import fetch
 import func
 import requests
+from playwright.sync_api import sync_playwright
 import sys
 
 #聯合新聞網
@@ -125,4 +126,59 @@ def ettoday(type):
         }
         data.append(entry)
 
+    return data
+
+#中時新聞網
+def chinatimes(type):
+    soup = fetch.get_soup_with_header(urls.chinatimes[type])
+    news = soup.select(".column-left .article-list > ul > li")
+    data = []
+    for idx, item in enumerate(news[:8], start=1):
+        h3 = item.find("h3")
+        if h3 is None:
+            continue
+
+        title = h3.get_text(strip=True)
+        link = h3.find("a")['href']
+        time = item.find("time")['datetime']
+        entry = {
+            "title": title,
+            "time": func.time_format(time),
+            "link": link
+        }
+        data.append(entry)
+    return data
+
+def chinatimes_playwright(type):
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--disable-infobars"
+            ]
+        )
+        page = browser.new_page(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+            viewport={"width": 1280, "height": 800},
+            java_script_enabled=True
+        )
+        page.goto(urls.chinatimes[type], wait_until="domcontentloaded")
+        news = page.query_selector_all(".column-left .article-list > ul > li")
+        data = []
+        for idx, item in enumerate(news[:8], start=1):
+            h3 = item.query_selector("h3")
+            if h3 is None:
+                continue
+
+            title = h3.inner_text()
+            link = h3.query_selector("a").get_attribute("href")
+            time = item.query_selector("time").get_attribute("datetime")
+            entry = {
+                "title": title,
+                "time": func.time_format(time),
+                "link": link
+            }
+            data.append(entry)
+        browser.close()
     return data

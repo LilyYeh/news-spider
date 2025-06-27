@@ -21,3 +21,7 @@ def setn():
 #ETtoday
 def ettoday():
     return template.ettoday(type)
+
+#中時新聞網
+def chinatimes():
+    return template.chinatimes(type)

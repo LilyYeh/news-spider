@@ -9,7 +9,7 @@ type = 'hot'
 
 #聯合新聞網
 def udn():
-    soup = fetch.get_soup(urls.udn['hot'])
+    soup = fetch.get_soup(urls.udn[type])
     news = soup.select("section.thumb-news .story-list__holder .story-list__news")
     data = []
     for item in news:
@@ -32,7 +32,7 @@ def udn():
 
 #自由電子報
 def itn():
-    soup = fetch.get_soup(urls.itn['hot'])
+    soup = fetch.get_soup(urls.itn[type])
     news1 = soup.select(".Listswiper-container .swiper-wrapper a")
     data = []
     for item in news1:
@@ -60,7 +60,7 @@ def itn():
 
 #蘋果新聞網
 def apple():
-    soup = fetch.get_soup(urls.apple['hot'])
+    soup = fetch.get_soup(urls.apple[type])
     news = soup.select("article.post-style3.postCount")
     data = []
     for item in news:
@@ -83,7 +83,7 @@ def apple():
 
 #三立新聞網
 def setn():
-    soup = fetch.get_soup(urls.setn['hot'])
+    soup = fetch.get_soup(urls.setn[type])
     news = soup.select("#NewsList .newsItems")
     data = []
     for item in news[:20]:
@@ -111,7 +111,7 @@ def setn():
 
 #TVBS
 def tvbs():
-    soup = fetch.get_soup(urls.tvbs['hot'])
+    soup = fetch.get_soup(urls.tvbs[type])
     news = soup.select("li")
     data = []
     cnt = 0
@@ -139,7 +139,7 @@ def tvbs():
     return data
 
 def yahoo():
-    soup = fetch.get_soup(urls.yahoo['hot'])
+    soup = fetch.get_soup(urls.yahoo[type])
     news = soup.select("#YDC-Stream .js-stream-content")
     data = []
     for item in news:
@@ -163,7 +163,7 @@ def yahoo_more():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)  # 設定 True 就是無頭模式
         page = browser.new_page()
-        page.goto('https://tw.news.yahoo.com/most-popular', wait_until="domcontentloaded")
+        page.goto(urls.yahoo[type], wait_until="domcontentloaded")
 
         # 滾動觸發載入更多
         page.mouse.wheel(0, 3000)
@@ -220,3 +220,24 @@ def ettoday():
 
     return data
 
+
+#中時新聞網
+def chinatimes():
+    soup = fetch.get_soup_with_header(urls.chinatimes[type])
+    news = soup.select(".column-left .article-list > li")
+    data = []
+    for idx, item in enumerate(news, start=1):
+        h3 = item.find("h3")
+        if h3 is None:
+            continue
+
+        title = h3.get_text(strip=True)
+        link = h3.find("a")['href']
+        time = item.find("time")['datetime']
+        entry = {
+            "title": title,
+            "time": func.time_format(time),
+            "link": link
+        }
+        data.append(entry)
+    return data

@@ -2,6 +2,7 @@ from const import urls
 import fetch
 import re
 import demjson3
+import json
 from playwright.sync_api import sync_playwright
 import sys
 
@@ -83,15 +84,6 @@ def setn():
         data.append(entry)
     return data
 
-#中時新聞網
-def chinatimes():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)  # 設為 False 以開啟瀏覽器視窗
-        page = browser.new_page()
-        page.goto(urls.chinatimes[type])
-        print(page.title())
-        browser.close()
-
 #ETtoday
 def ettoday():
     soup = fetch.get_soup(urls.ettoday[type])
@@ -116,3 +108,52 @@ def ettoday():
         }
         data.append(entry)
     return data
+
+#中時新聞網
+def chinatimes():
+    soup = fetch.get_soup_with_header(urls.chinatimes[type])
+    scripts = soup.find_all('script')
+    js_code = None
+    for script in scripts:
+        if 'var data = [' in script.text:
+            js_code = script.string or script.text
+            break
+    pattern = r'data\s*=\s*(\[\s*.*?\s*\]);'
+    match = re.search(pattern, js_code, re.DOTALL)
+    js_array_str = match.group(1)
+    js_array_str = re.sub(r'photoUrl\s*=\s*"', '"', js_array_str)
+    js_array_str = re.sub(r'GetUrl_Cn\s*\(\s*"', '"', js_array_str)
+    js_array_str = re.sub(r'"\s*\)', '"', js_array_str)
+    js_array_str = js_array_str.replace('<br>', '')
+    news = json.loads(js_array_str)
+    data = []
+    for item in news:
+        title = item['captionTitle']
+        link = item['linkUrl']
+        entry = {
+            "title": title,
+            "link": link
+        }
+        data.append(entry)
+    return data
+
+def chinatimes_playwright():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--disable-infobars"
+            ]
+        )
+        page = browser.new_page(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+            viewport={"width": 1280, "height": 800},
+            java_script_enabled=True
+        )
+        page.goto(urls.chinatimes[type], wait_until="domcontentloaded")
+        news = page.query_selector_all("#news-pane-1-1 .latest-news > ul > li")
+        for idx, item in enumerate(news, start=1):
+            h4 = item.query_selector("h4")
+            print(h4.inner_text())
+        browser.close()

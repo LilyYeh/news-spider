@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    with ThreadPoolExecutor() as executor:
+    with ThreadPoolExecutor(max_workers=4) as executor:
         # 提交任務給執行緒池
         futures = {
             'top_udn': executor.submit(top.udn),
@@ -20,8 +20,8 @@ def index():
             'top_apple': executor.submit(top.apple),
             'top_setn': executor.submit(top.setn),
             'top_ettoday': executor.submit(top.ettoday),
-            #'top_chinatimes': executor.submit(top.chinatimes),
-            'hot_yahoo': executor.submit(hot.yahoo_more),
+            'top_chinatimes': executor.submit(top.chinatimes),
+            'hot_yahoo': executor.submit(hot.yahoo),
             'hot_udn': executor.submit(hot.udn),
             'hot_itn': executor.submit(hot.itn),
             'hot_apple': executor.submit(hot.apple),
@@ -59,64 +59,64 @@ def index():
             'keyword_tvbs': executor.submit(keyword.tvbs),
             'keyword_chinatimes': executor.submit(keyword.chinatimes),
         }
-
+        # 蘋果、聯合、自由、中時、三立
         news = {
             "top": {
+                "apple": futures['top_apple'].result(),
                 "udn": futures['top_udn'].result(),
                 "itn": futures['top_itn'].result(),
-                "apple": futures['top_apple'].result(),
+                "chinatimes": futures['top_chinatimes'].result(),
                 "setn": futures['top_setn'].result(),
-                #"chinatimes": futures['top_chinatimes'].result(),
                 "ettoday": futures['top_ettoday'].result(),
             },
             "hot": {
                 "yahoo": futures['hot_yahoo'].result(),
+                "tvbs": futures['hot_tvbs'].result(),
+                "apple": futures['hot_apple'].result(),
                 "udn": futures['hot_udn'].result(),
                 "itn": futures['hot_itn'].result(),
-                "apple": futures['hot_apple'].result(),
-                "setn": futures['hot_setn'].result(),
-                "tvbs": futures['hot_tvbs'].result(),
                 "chinatimes": futures['hot_chinatimes'].result(),
+                "setn": futures['hot_setn'].result(),
                 "ettoday": futures['hot_ettoday'].result(),
             },
             "society": {
+                "apple": futures["society_apple"].result(),
                 "udn": futures["society_udn"].result(),
                 "itn": futures["society_itn"].result(),
-                "apple": futures["society_apple"].result(),
-                "setn": futures["society_setn"].result(),
                 "chinatimes": futures["society_chinatimes"].result(),
+                "setn": futures["society_setn"].result(),
                 "ettoday": futures["society_ettoday"].result(),
             },
             "political": {
+                "apple": futures["political_apple"].result(),
                 "udn": futures["political_udn"].result(),
                 "itn": futures["political_itn"].result(),
-                "apple": futures["political_apple"].result(),
-                "setn": futures["political_setn"].result(),
                 "chinatimes": futures["political_chinatimes"].result(),
+                "setn": futures["political_setn"].result(),
                 "ettoday": futures["political_ettoday"].result(),
             },
             "international": {
+                "apple": futures["international_apple"].result(),
                 "udn": futures["international_udn"].result(),
                 "itn": futures["international_itn"].result(),
-                "apple": futures["international_apple"].result(),
-                "setn": futures["international_setn"].result(),
                 "chinatimes": futures["international_chinatimes"].result(),
+                "setn": futures["international_setn"].result(),
                 "ettoday": futures["international_ettoday"].result(),
             },
             "lifestyle": {
+                "apple": futures["lifestyle_apple"].result(),
                 "udn": futures["lifestyle_udn"].result(),
                 "itn": futures["lifestyle_itn"].result(),
-                "apple": futures["lifestyle_apple"].result(),
-                "setn": futures["lifestyle_setn"].result(),
                 "chinatimes": futures["lifestyle_chinatimes"].result(),
+                "setn": futures["lifestyle_setn"].result(),
                 "ettoday": futures["lifestyle_ettoday"].result(),
             },
             "keyword": {
+                "tvbs": futures["keyword_tvbs"].result(),
                 "udn": futures["keyword_udn"].result(),
                 "itn": futures["keyword_itn"].result(),
-                "setn": futures["keyword_setn"].result(),
-                "tvbs": futures["keyword_tvbs"].result(),
                 "chinatimes": futures["keyword_chinatimes"].result(),
+                "setn": futures["keyword_setn"].result(),
             }
         }
 

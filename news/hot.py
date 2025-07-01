@@ -234,10 +234,15 @@ def chinatimes():
         title = h3.get_text(strip=True)
         link = h3.find("a")['href']
         time = item.find("time")['datetime']
+        tag = {
+            "text": item.select_one('.category').text,
+            "link": item.select_one('.category a')['href']
+        }
         entry = {
             "title": title,
             "time": func.time_format(time),
-            "link": link
+            "link": link,
+            "tag": tag
         }
         data.append(entry)
     return data

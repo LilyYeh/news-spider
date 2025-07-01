@@ -118,8 +118,16 @@ def chinatimes():
         if 'var data = [' in script.text:
             js_code = script.string or script.text
             break
+
+    if not js_code:
+        return []
+
     pattern = r'data\s*=\s*(\[\s*.*?\s*\]);'
     match = re.search(pattern, js_code, re.DOTALL)
+
+    if not match:
+        return []
+
     js_array_str = match.group(1)
     js_array_str = re.sub(r'photoUrl\s*=\s*"', '"', js_array_str)
     js_array_str = re.sub(r'GetUrl_Cn\s*\(\s*"', '"', js_array_str)

@@ -8,11 +8,17 @@
     <!-- 引入 Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
 </head>
-<body>
+<body class="dark">
 
 <div class="container">
-    <h1>各媒體新聞</h1>
+    <header>
+        <h1>各媒體新聞</h1>
+        <div class="setting">
+            <input type="checkbox" name="is_dark" checked>深色模式
+        </div>
+    </header>
 
     <div id="navWrapper">
         <div class="placeholder" id="navPlaceholder"></div>
@@ -50,7 +56,7 @@
                             {% if item.tag %}
                             <span class="tag">
                                 {% if item.tag['link'] %}
-                                <a href="{{ item.tag['link'] }}">{{ item.tag['text'] }}</a>
+                                <a href="{{ item.tag['link'] }}" target="_blank">{{ item.tag['text'] }}</a>
                                 {% else %}
                                 <span>{{ item.tag['text'] }}</span>
                                 {% endif %}

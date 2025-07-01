@@ -18,7 +18,28 @@ $(document).ready(function () {
         return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
     }
 
-    // 頁面載入後設定選中的 Tab
+    // 頁面載入後，設定是否深色模式
+    const $body= $('body');
+    const $setting = $('input[name=is_dark]');
+    const isDark = localStorage.getItem('isDark');
+    $body.addClass('dark');
+    $setting.prop('checked', true)
+    if (isDark === 'false') {
+        $body.removeClass('dark');
+        $setting.prop('checked', false)
+    }
+
+    $setting.on('click', function () {
+        if ($(this).is(':checked')) {
+            localStorage.setItem('isDark', 'true');
+            $body.addClass('dark');
+        } else {
+            localStorage.setItem('isDark', 'false');
+            $body.removeClass('dark');
+        }
+    });
+
+    // 頁面載入後，設定選中的 Tab
     const tab = sessionStorage.getItem('selectedTab');
     if (tab) {
         $('#' + tab + "-tab").addClass('active');

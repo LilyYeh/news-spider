@@ -84,4 +84,5 @@ chinatimes = {
     "political": "https://www.chinatimes.com/politic/?chdtv",
     "international": "https://www.chinatimes.com/world/?chdtv",
     "lifestyle": "https://www.chinatimes.com/life/?chdtv",
+    "keyword": "https://www.chinatimes.com/?chdtv"
 }

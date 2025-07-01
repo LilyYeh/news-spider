@@ -4,11 +4,22 @@ body {
     margin-top: 20px;
 }
 
+header {
+    display: flex;
+    align-items: baseline;
+}
+
+header .setting input {
+    margin-right: 4px;
+    cursor: pointer;
+}
+
 .container {
     padding-bottom: 100px;
 }
 
 h1 {
+    flex: 1;
     margin-bottom: 20px;
 }
 
@@ -19,6 +30,10 @@ h1 {
 
 #navWrapper .nav-tabs {
     position: relative;
+}
+
+#navWrapper .nav-tabs .nav-item {
+    margin-right: 4px;
 }
 
 #navWrapper label.last-update-time {
@@ -60,9 +75,16 @@ h2 {
     margin-top: 20px;
 }
 
+h3 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+
 h3 > a {
     text-decoration: none;
     color: #000;
+    margin-right: 10px;
 }
 
 h3 > a:hover {
@@ -72,7 +94,7 @@ h3 > a:hover {
 
 h3 label a {
     font-size: 12px;
-    color: #fff;
+    color: #fff !important;
     font-style: normal;
     letter-spacing: 1px;
     padding: 3px 5px;
@@ -84,70 +106,70 @@ h3 label a {
 }
 
 h3 label a:hover {
-    background: #fff;
-    border: 1px solid #e05d14;
-    color: #e05d14;
+    background: #fff !important;
+    border: 1px solid #e05d14 !important;
+    color: #e05d14 !important;
     text-decoration: none;
 }
 
 h3 label.political a {
-    background: #8e8e9b;
+    background: #8e8e9b !important;
 }
 
 h3 label.political a:hover {
-    background: #fff;
-    border: 1px solid #8e8e9b;
-    color: #8e8e9b;
+    background: #fff !important;
+    border: 1px solid #8e8e9b !important;
+    color: #8e8e9b !important;
 }
 
 h3 label.international a {
-    background: #055699;
+    background: #055699 !important;
 }
 
 h3 label.international a:hover {
-    background: #fff;
-    border: 1px solid #055699;
-    color: #055699;
+    background: #fff !important;
+    border: 1px solid #055699 !important;
+    color: #055699 !important;
 }
 
 h3 label.lifestyle a {
-    background: #66a9d8;
+    background: #66a9d8 !important;
 }
 
 h3 label.lifestyle a:hover {
-    background: #fff;
-    border: 1px solid #66a9d8;
-    color: #66a9d8;
+    background: #fff !important;
+    border: 1px solid #66a9d8 !important;
+    color: #66a9d8 !important;
 }
 
 h3 label.hot a {
-    background: #F00078;
+    background: #F00078 !important;
 }
 
 h3 label.hot a:hover {
-    background: #fff;
-    border: 1px solid #F00078;
-    color: #F00078;
+    background: #fff !important;
+    border: 1px solid #F00078 !important;
+    color: #F00078 !important;
 }
 
 h3 label.top a {
-    background: #00BB00;
+    background: #00BB00 !important;
 }
 
 h3 label.top a:hover {
-    background: #fff;
-    border: 1px solid #00BB00;
-    color: #00BB00;
+    background: #fff !important;
+    border: 1px solid #00BB00 !important;
+    color: #00BB00 !important;
 }
 
 h3 label.keyword a {
-    background: #8f1ac9;
+    background: #8f1ac9 !important;
 }
 
 h3 label.keyword a:hover {
-    background: #fff;
-    border: 1px solid #8f1ac9;
-    color: #8f1ac9;
+    background: #fff !important;
+    border: 1px solid #8f1ac9 !important;
+    color: #8f1ac9 !important;
 }
 
 .tab-content ul li .source {
@@ -202,10 +224,15 @@ h3 label.keyword a:hover {
 }
 
 .ettoday-wrapper .header h3 {
+    display: initial;
     flex: 6;
     padding-top: 12px;
     padding-left: 20px;
     margin-bottom: 20px;
+}
+
+.ettoday-wrapper .header h3 > a {
+    margin-right: 0;
 }
 
 .ettoday-wrapper .header h3 img.logo {

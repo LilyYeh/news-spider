@@ -1,0 +1,55 @@
+body.dark {
+    background: #0e0e0f;
+    color: #fff;
+}
+
+body.dark h3 > a {
+    color: #fff;
+}
+
+body.dark a {
+    color: rgb(255 255 255 / 63%);
+}
+
+body.dark h3 label a {
+    color: #fff;
+}
+
+body.dark .nav-tabs {
+    border-bottom: 2px solid #393939;
+}
+
+body.dark .nav-tabs .nav-item.show .nav-link,
+body.dark .nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #393939;
+    border-color: transparent;
+}
+
+body.dark .nav-tabs .nav-link:focus,
+body.dark .nav-tabs .nav-link:hover {
+    border-color: transparent;
+    background: #393939;
+}
+
+body.dark #navWrapper .nav-tabs.sticky-nav {
+    background-color: #0e0e0f;
+}
+
+body.dark .tag > a,
+body.dark .tag > span {
+    border: grey 1px solid;
+    color: grey;
+}
+
+body.dark #keyword > ul > li {
+    border: 1px solid grey;
+}
+
+body.dark .ettoday-wrapper {
+    color: initial;
+}
+
+body.dark .ettoday-wrapper a {
+    color: initial;
+}
